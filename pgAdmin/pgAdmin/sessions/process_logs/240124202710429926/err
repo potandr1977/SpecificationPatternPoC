@@ -1,0 +1,150 @@
+240124202710765001,pg_restore: connecting to database for restore
+
+240124202710766564,pg_restore: creating SCHEMA "postgres_air"
+
+240124202710767941,pg_restore: creating PROCEDURE "postgres_air.advance_air_time(integer, text, boolean)"
+
+240124202710769224,pg_restore: creating TABLE "postgres_air.account"
+
+240124202710771941,pg_restore: creating SEQUENCE "postgres_air.account_account_id_seq"
+
+240124202710774741,pg_restore: creating SEQUENCE OWNED BY "postgres_air.account_account_id_seq"
+
+240124202710776072,pg_restore: creating TABLE "postgres_air.aircraft"
+
+240124202710781437,pg_restore: creating TABLE "postgres_air.airport"
+
+240124202710786610,pg_restore: creating SEQUENCE "postgres_air.boarding_pass_pass_id_seq"
+
+240124202710789377,pg_restore: creating TABLE "postgres_air.boarding_pass"
+
+240124202710794974,pg_restore: creating TABLE "postgres_air.booking"
+
+240124202710800163,pg_restore: creating TABLE "postgres_air.booking_leg"
+
+240124202710802993,pg_restore: creating SEQUENCE "postgres_air.booking_leg_booking_leg_id_seq"
+
+240124202710805603,pg_restore: creating SEQUENCE OWNED BY "postgres_air.booking_leg_booking_leg_id_seq"
+
+240124202710806908,pg_restore: creating SEQUENCE "postgres_air.booking_number"
+
+240124202710809510,pg_restore: creating TABLE "postgres_air.flight"
+
+240124202710814775,pg_restore: creating SEQUENCE "postgres_air.flight_flight_id_seq"
+
+240124202710817524,pg_restore: creating SEQUENCE OWNED BY "postgres_air.flight_flight_id_seq"
+
+240124202710818795,pg_restore: creating TABLE "postgres_air.frequent_flyer"
+
+240124202710824159,pg_restore: creating SEQUENCE "postgres_air.frequent_flyer_frequent_flyer_id_seq"
+
+240124202710826735,pg_restore: creating SEQUENCE OWNED BY "postgres_air.frequent_flyer_frequent_flyer_id_seq"
+
+240124202710828269,pg_restore: creating TABLE "postgres_air.passenger"
+
+240124202710833365,pg_restore: creating SEQUENCE "postgres_air.passenger_passenger_id_seq"
+
+240124202710836164,pg_restore: creating SEQUENCE OWNED BY "postgres_air.passenger_passenger_id_seq"
+
+240124202710837571,pg_restore: creating TABLE "postgres_air.phone"
+
+240124202710843021,pg_restore: creating SEQUENCE "postgres_air.phone_phone_id_seq"
+
+240124202710845622,pg_restore: creating SEQUENCE OWNED BY "postgres_air.phone_phone_id_seq"
+
+240124202710846955,pg_restore: creating DEFAULT "postgres_air.account account_id"
+
+240124202710848191,pg_restore: creating DEFAULT "postgres_air.booking_leg booking_leg_id"
+
+240124202710849406,pg_restore: creating DEFAULT "postgres_air.flight flight_id"
+
+240124202710850639,pg_restore: creating DEFAULT "postgres_air.frequent_flyer frequent_flyer_id"
+
+240124202710851857,pg_restore: creating DEFAULT "postgres_air.passenger passenger_id"
+
+240124202710853229,pg_restore: creating DEFAULT "postgres_air.phone phone_id"
+
+240124202710854638,pg_restore: processing data for table "postgres_air.account"
+
+240124202711659629,pg_restore: processing data for table "postgres_air.aircraft"
+
+240124202711661353,pg_restore: processing data for table "postgres_air.airport"
+
+240124202711663951,pg_restore: processing data for table "postgres_air.boarding_pass"
+
+240124202751563208,pg_restore: processing data for table "postgres_air.booking"
+
+240124202802417715,pg_restore: processing data for table "postgres_air.booking_leg"
+
+240124202822424191,pg_restore: processing data for table "postgres_air.flight"
+
+240124202824004614,pg_restore: processing data for table "postgres_air.frequent_flyer"
+
+240124202824223511,pg_restore: processing data for table "postgres_air.passenger"
+
+240124202848314419,pg_restore: processing data for table "postgres_air.phone"
+
+240124202848786719,pg_restore: executing SEQUENCE SET account_account_id_seq
+
+240124202848790024,pg_restore: executing SEQUENCE SET boarding_pass_pass_id_seq
+
+240124202848793327,pg_restore: executing SEQUENCE SET booking_leg_booking_leg_id_seq
+
+240124202848796644,pg_restore: executing SEQUENCE SET booking_number
+
+240124202848799976,pg_restore: executing SEQUENCE SET flight_flight_id_seq
+
+240124202848803488,pg_restore: executing SEQUENCE SET frequent_flyer_frequent_flyer_id_seq
+
+240124202848806632,pg_restore: executing SEQUENCE SET passenger_passenger_id_seq
+
+240124202848809986,pg_restore: executing SEQUENCE SET phone_phone_id_seq
+
+240124202848813083,pg_restore: creating CONSTRAINT "postgres_air.account account_pkey"
+
+240124202849100643,pg_restore: creating CONSTRAINT "postgres_air.aircraft aircraft_pkey"
+
+240124202849112388,pg_restore: creating CONSTRAINT "postgres_air.airport airport_pkey"
+
+240124202849123684,pg_restore: creating CONSTRAINT "postgres_air.boarding_pass boarding_pass_pkey"
+
+240124202905086442,pg_restore: creating CONSTRAINT "postgres_air.booking booking_booking_ref_key"
+
+240124202915280993,pg_restore: creating CONSTRAINT "postgres_air.booking_leg booking_leg_pkey"
+
+240124202925716813,pg_restore: creating CONSTRAINT "postgres_air.booking booking_pkey"
+
+240124202927612434,pg_restore: creating CONSTRAINT "postgres_air.flight flight_pkey"
+
+240124202927841994,pg_restore: creating CONSTRAINT "postgres_air.frequent_flyer frequent_flyer_pkey"
+
+240124202927903727,pg_restore: creating CONSTRAINT "postgres_air.passenger passenger_pkey"
+
+240124202937046478,pg_restore: creating CONSTRAINT "postgres_air.phone phone_pkey"
+
+240124202937202220,pg_restore: creating FK CONSTRAINT "postgres_air.flight aircraft_code_fk"
+
+240124202937441278,pg_restore: creating FK CONSTRAINT "postgres_air.flight arrival_airport_fk"
+
+240124202937567395,pg_restore: creating FK CONSTRAINT "postgres_air.booking booking_account_id_fk"
+
+240124202939991756,pg_restore: creating FK CONSTRAINT "postgres_air.booking_leg booking_id_fk"
+
+240124202946502551,pg_restore: creating FK CONSTRAINT "postgres_air.boarding_pass booking_leg_id_fk"
+
+240124203002277571,pg_restore: creating FK CONSTRAINT "postgres_air.flight departure_airport_fk"
+
+240124203002399767,pg_restore: creating FK CONSTRAINT "postgres_air.booking_leg flight_id_fk"
+
+240124203004725055,pg_restore: creating FK CONSTRAINT "postgres_air.account frequent_flyer_id_fk"
+
+240124203004813287,pg_restore: creating FK CONSTRAINT "postgres_air.passenger pass_account_id_fk"
+
+240124203009542338,pg_restore: creating FK CONSTRAINT "postgres_air.passenger pass_booking_id_fk"
+
+240124203015506190,pg_restore: creating FK CONSTRAINT "postgres_air.passenger pass_frequent_flyer_id_fk"
+
+240124203017938391,pg_restore: creating FK CONSTRAINT "postgres_air.boarding_pass passenger_id_fk"
+
+240124203033816620,pg_restore: creating FK CONSTRAINT "postgres_air.phone phone_account_id_fk"
+

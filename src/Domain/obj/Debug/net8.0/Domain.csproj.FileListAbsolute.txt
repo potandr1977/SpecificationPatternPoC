@@ -1,0 +1,11 @@
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\bin\Debug\net8.0\Domain.dll
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\bin\Debug\net8.0\Domain.pdb
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.dll
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\Domain.pdb
+C:\TempCSharp\SpecificationPatternPoC\src\Domain\obj\Debug\net8.0\ref\Domain.dll
