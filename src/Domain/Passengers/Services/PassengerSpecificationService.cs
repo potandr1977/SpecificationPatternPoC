@@ -321,21 +321,28 @@ public class PassengerSpecificationService(IPassengerSpecificationProvider passe
         where T : IFiltrationFieldsSet
     {
         // Выборка по идентификаторам пассажиров, используем соответствующую спецификацию.
-        var filter = (Specification<T>) new PassengerIdsSpecification<T>(request.PassengerIds);
+        var filter = (Specification<T>) new IdsSpecification<T>(nameof(IFiltrationFieldsSet.Id), request.PassengerIds);
 
         if (request.PassengerIdsToExclude != null)
         {
             // если заданы идентификаторы подлежащие исключению из выходного набора данных,
             // то переиспользуем спецификацию выборки по идентификаторам инвертировав её, с помощью оператора "!".
-            filter &= !(new PassengerIdsSpecification<T>(request.PassengerIdsToExclude));
+            //filter &= !(new PassengerIdsSpecification<T>(request.PassengerIdsToExclude));
+            filter &= !(new IdsSpecification<T>(nameof(IFiltrationFieldsSet.Id), request.PassengerIdsToExclude));
         }
 
         if (request.UpdateTsStart.HasValue || request.UpdateTsEnd.HasValue)
         {
             // если заданы границы временного интервала, то фильтруем по датам.
-            filter &= new UpdateTsIntervalSpecification<T>(request.UpdateTsStart, request.UpdateTsEnd);
+            filter &= new DateIntervalSpecification<T>(nameof(IFiltrationFieldsSet.UpdateTs), request.UpdateTsStart, request.UpdateTsEnd);
         }
 
         return filter;
     }
 }
+
+/* отлавливаем крайние запросы к бд
+set search_path = postgres_air;
+
+select  datid, query_start, query from pg_stat_activity
+ */
