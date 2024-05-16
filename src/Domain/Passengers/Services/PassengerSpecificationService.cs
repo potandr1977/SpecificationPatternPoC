@@ -318,7 +318,7 @@ public class PassengerSpecificationService(IPassengerSpecificationProvider passe
     /// <param name="request"></param>
     /// <returns></returns>
     private static Specification<T> ConstructSpecification<T>(GetPassengerRequest request)
-        where T : IFiltrationFieldsSet
+        where T : new()
     {
         // Выборка по идентификаторам пассажиров, используем соответствующую спецификацию.
         var filter = (Specification<T>) new IdsSpecification<T>(nameof(IFiltrationFieldsSet.Id), request.PassengerIds);

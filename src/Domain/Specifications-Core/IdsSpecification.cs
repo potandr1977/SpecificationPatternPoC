@@ -11,7 +11,7 @@ namespace Domain.Specifications.Core;
 /// <param name="fieldName">Наименование поля по которому нужно фильтровать.</param>
 /// <param name="passnegerIds">Идентификаторы пассажиров.</param>
 public class IdsSpecification<T>(string fieldName, int[] passnegerIds) : Specification<T>
-    where T : IFiltrationFieldsSet
+    where T : new()
 {
     private readonly List<int> Ids = [.. passnegerIds];
 

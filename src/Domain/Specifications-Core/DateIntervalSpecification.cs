@@ -12,7 +12,7 @@ namespace Domain.Specifications;
 /// <param name="updateTsEnd">Дата окончания периода фильтрации.</param>
 /// </summary
 public class DateIntervalSpecification<T>(string fieldName, DateTime? updateTsStrart, DateTime? updateTsEnd) : Specification<T>
-    where T : IFiltrationFieldsSet
+    where T : new()
 {
     private readonly DateTime? updateTsStart = updateTsStrart;
     private readonly DateTime? updateTsEnd = updateTsEnd;
