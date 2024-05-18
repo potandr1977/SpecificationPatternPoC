@@ -6,7 +6,7 @@ namespace Domain.Passengers;
 /// Список полей по которым мы фильруем данные.
 /// Интерфес нужен чтобы не плодить спецификации отдельно для сущности Passenger и PassengerRawModel
 /// </summary>
-public interface IFiltrationFieldsSet
+public record FiltrationFieldsSet
 {
     /// <summary>
     /// Ид.

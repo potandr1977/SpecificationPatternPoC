@@ -11,7 +11,7 @@ namespace Domain.Specifications;
 /// </summary>
 /// <param name="passnegerIds">Идентификаторы пассажиров.</param>
 public class PassengerIdsSpecification<T>(int[] passnegerIds) : Specification<T>
-    where T : IFiltrationFieldsSet
+    where T : FiltrationFieldsSet
 {
     private readonly int[] passengerIds = passnegerIds;
 

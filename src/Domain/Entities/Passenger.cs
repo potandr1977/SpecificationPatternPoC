@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public record Passenger : IFiltrationFieldsSet
+    public record Passenger : FiltrationFieldsSet
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public int BookingId { get; set; }
 
@@ -22,7 +22,7 @@ namespace Domain.Entities
 
         public int? Age { get; set; }
 
-        public DateTime? UpdateTs { get; set; }
+        //public DateTime? UpdateTs { get; set; }
 
         public Account Account { get; set; }
 

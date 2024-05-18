@@ -2,12 +2,12 @@
 
 namespace Domain.Passengers.Models;
 
-public record PassengerRawModel : IFiltrationFieldsSet
+public record PassengerRawModel : FiltrationFieldsSet
 {
     /// <summary>
     /// Ид.
     /// </summary>
-    public int Id { get; set; }
+    //public int Id { get; set; }
 
     /// <summary>
     /// Имя.
@@ -37,5 +37,5 @@ public record PassengerRawModel : IFiltrationFieldsSet
     /// <summary>
     /// Дата изменения.
     /// </summary>
-    public DateTime? UpdateTs { get; set; }
+    //public DateTime? UpdateTs { get; set; }
 }

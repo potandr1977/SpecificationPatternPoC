@@ -318,23 +318,23 @@ public class PassengerSpecificationService(IPassengerSpecificationProvider passe
     /// <param name="request"></param>
     /// <returns></returns>
     private static Specification<T> ConstructSpecification<T>(GetPassengerRequest request)
-        where T : new()
+        where T : FiltrationFieldsSet
     {
         // Выборка по идентификаторам пассажиров, используем соответствующую спецификацию.
-        var filter = (Specification<T>) new IdsSpecification<T>(nameof(IFiltrationFieldsSet.Id), request.PassengerIds);
+        var filter = (Specification<T>) new IdsSpecification<T>(x => x.Id, request.PassengerIds);
 
         if (request.PassengerIdsToExclude != null)
         {
             // если заданы идентификаторы подлежащие исключению из выходного набора данных,
             // то переиспользуем спецификацию выборки по идентификаторам инвертировав её, с помощью оператора "!".
             //filter &= !(new PassengerIdsSpecification<T>(request.PassengerIdsToExclude));
-            filter &= !(new IdsSpecification<T>(nameof(IFiltrationFieldsSet.Id), request.PassengerIdsToExclude));
+            filter &= !(new IdsSpecification<T>(x => x.Id, request.PassengerIdsToExclude));
         }
 
         if (request.UpdateTsStart.HasValue || request.UpdateTsEnd.HasValue)
         {
             // если заданы границы временного интервала, то фильтруем по датам.
-            filter &= new DateIntervalSpecification<T>(nameof(IFiltrationFieldsSet.UpdateTs), request.UpdateTsStart, request.UpdateTsEnd);
+            filter &= new DateIntervalSpecification<T>(x => x.UpdateTs, request.UpdateTsStart, request.UpdateTsEnd);
         }
 
         return filter;

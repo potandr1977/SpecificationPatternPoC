@@ -9,7 +9,7 @@ namespace Domain.Specifications;
 /// Спецификация для отбора по вхождению даты обновления данных о пассажире (UpdateTs) в заданный интервал.
 /// </summary
 public class UpdateTsIntervalSpecification<T>(DateTime? updateTsStrart, DateTime? updateTsEnd) : Specification<T>
-    where T : IFiltrationFieldsSet
+    where T : FiltrationFieldsSet
 {
     private readonly DateTime? updateTsStart = updateTsStrart;
     private readonly DateTime? updateTsEnd = updateTsEnd;

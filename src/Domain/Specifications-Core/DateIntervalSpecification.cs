@@ -11,14 +11,19 @@ namespace Domain.Specifications;
 /// <param name="updateTsStart">Дата начала периода фильтрации.</param>
 /// <param name="updateTsEnd">Дата окончания периода фильтрации.</param>
 /// </summary
-public class DateIntervalSpecification<T>(string fieldName, DateTime? updateTsStrart, DateTime? updateTsEnd) : Specification<T>
-    where T : new()
+public class DateIntervalSpecification<T>(
+    Expression<Func<T, DateTime?>> keySelector, 
+    DateTime? updateTsStrart, DateTime? updateTsEnd, bool defaultValue = false) : Specification<T>
+    where T : FiltrationFieldsSet
 {
+    private readonly Expression<Func<T, DateTime?>> keySelector = keySelector;
     private readonly DateTime? updateTsStart = updateTsStrart;
     private readonly DateTime? updateTsEnd = updateTsEnd;
 
+
     public override Expression<Func<T, bool>> ToExpression()
     {
+        var fieldName = ((MemberExpression)keySelector.Body).Member.Name;
         var param = Expression.Parameter(typeof(T), fieldName);
        
         var expressionNull = Expression.Constant(null);
@@ -70,7 +75,7 @@ public class DateIntervalSpecification<T>(string fieldName, DateTime? updateTsSt
             return Expression.Lambda<Func<T, bool>>(orElse, param);
         }
 
-        return x => true;
+        return x => defaultValue;
     }
 
     private static DateTime GetStartDate(DateTime requestTo) =>
