@@ -1,77 +1,77 @@
 ﻿using Domain.Passengers;
 using Domain.Specifications.Core;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Domain.Specifications;
 
 /// <summary>
-/// Спецификация для отбора по вхождению даты обновления данных в заданный интервал.
-/// <param name="fieldName">Наименование поля по которому нужно фильтровать.</param>
-/// <param name="updateTsStart">Дата начала периода фильтрации.</param>
-/// <param name="updateTsEnd">Дата окончания периода фильтрации.</param>
+/// Спецификация для отбора по вхождению даты в заданный интервал.
+/// <param name="keySelector">Поле по которому нужно фильтровать.</param>
+/// <param name="dateStart">Дата начала периода фильтрации.</param>
+/// <param name="dateEnd">Дата окончания периода фильтрации.</param>
+/// <param name="defaultValue">Значение по умолчанию.</param>
 /// </summary
 public class DateIntervalSpecification<T>(
     Expression<Func<T, DateTime?>> keySelector, 
-    DateTime? updateTsStrart, DateTime? updateTsEnd, bool defaultValue = false) : Specification<T>
+    DateTime? dateStart, DateTime? dateEnd, bool defaultValue = false) : Specification<T>
     where T : FiltrationFieldsSet
 {
     private readonly Expression<Func<T, DateTime?>> keySelector = keySelector;
-    private readonly DateTime? updateTsStart = updateTsStrart;
-    private readonly DateTime? updateTsEnd = updateTsEnd;
-
+    private readonly DateTime? dateStart = dateStart;
+    private readonly DateTime? dateEnd = dateEnd;
 
     public override Expression<Func<T, bool>> ToExpression()
     {
         var fieldName = ((MemberExpression)keySelector.Body).Member.Name;
-        var param = Expression.Parameter(typeof(T), fieldName);
-       
+        var param = keySelector.Parameters.FirstOrDefault();
+        var dateExpr = Expression.Property(param, fieldName);
+
+
         var expressionNull = Expression.Constant(null);
 
-        if (updateTsStart.HasValue && !updateTsEnd.HasValue)
+        if (dateStart.HasValue && !dateEnd.HasValue)
         {
-            var dateFrom = GetStartDate(updateTsStart.Value);
+            var dateFrom = GetStartDate(dateStart.Value);
             var expressionFrom = Expression.Constant(dateFrom);
 
             var orElse = Expression.OrElse(
-                            GreaterThanNulable(Expression.Property(param, fieldName), expressionFrom),
-                            Expression.Equal(Expression.Property(param, fieldName), expressionNull));
+                            GreaterThanNulable(dateExpr, expressionFrom),
+                            Expression.Equal(dateExpr, expressionNull));
 
-            //equivalent return x => x.UpdateTs >= dateFrom || x.UpdateTs == null;
             return Expression.Lambda<Func<T, bool>>(orElse,param);
         }
 
-        if (updateTsEnd.HasValue && !updateTsStart.HasValue)
+        if (dateEnd.HasValue && !dateStart.HasValue)
         {
-            var dateTo = GetEndDate(updateTsEnd.Value);
+            var dateTo = GetEndDate(dateEnd.Value);
             
             var expressionTo = Expression.Constant(dateTo);
 
             var orElse = Expression.OrElse(
-                    GreaterThanNulable(expressionTo, Expression.Property(param, fieldName)),
-                    Expression.Equal(Expression.Property(param, fieldName), expressionNull));
+                    GreaterThanNulable(expressionTo, dateExpr),
+                    Expression.Equal(dateExpr, expressionNull));
 
-            //equivalent return x => x.UpdateTs < dateTo || x.UpdateTs == null;
             return Expression.Lambda<Func<T, bool>>(orElse, param);
         }
 
-        if (updateTsEnd.HasValue && updateTsStart.HasValue)
+        if (dateEnd.HasValue && dateStart.HasValue)
         {
-            var dateFrom = GetStartDate(updateTsStart.Value);
+            var dateFrom = GetStartDate(dateStart.Value);
             var expressionFrom = Expression.Constant(dateFrom);
 
-            var dateTo = GetEndDate(updateTsEnd.Value);
+            var dateTo = GetEndDate(dateEnd.Value);
             var expressionTo = Expression.Constant(dateTo);
 
             var twoDateFilterExpression = Expression.AndAlso(
-                    GreaterThanNulable(Expression.Property(param, fieldName), expressionFrom),
-                    GreaterThanNulable(expressionTo,Expression.Property(param, fieldName)));
+                    GreaterThanNulable(dateExpr, expressionFrom),
+                    GreaterThanNulable(expressionTo, dateExpr));
 
             var orElse = Expression.OrElse(
                     twoDateFilterExpression,
-                    Expression.Equal(Expression.Property(param, fieldName), expressionNull));
+                    Expression.Equal(dateExpr, expressionNull));
 
-            //equivalent return x => (x.UpdateTs >= dateFrom && x.UpdateTs < dateTo) || x.UpdateTs == null;
             return Expression.Lambda<Func<T, bool>>(orElse, param);
         }
 
